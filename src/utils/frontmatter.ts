@@ -2,7 +2,8 @@ import matter from "gray-matter"
 import type { Article } from '~/models';
 
 type FrontMatterContent = {
-    doc_type?: string;
+    title?: string;
+    author?: string;
     url?: string;
 }
 
@@ -10,7 +11,8 @@ export const frontMatterDocType = "hypothesis-highlights"
 
 export const addFrontMatter = (markdownContent: string, article: Article) => {
     const frontMatter: FrontMatterContent = {
-        doc_type: frontMatterDocType,
+        title: article.metadata.title,
+        author: article.metadata.author,
         url: article.metadata.url,
     };
     return matter.stringify(markdownContent, frontMatter);
